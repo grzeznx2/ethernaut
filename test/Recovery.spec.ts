@@ -3,7 +3,7 @@ import { ethers,  } from "hardhat";
 const{ utils, provider, BigNumber } = ethers
 
 describe("Recovery", () => {
-  it.only("Solves the challenge", async () => {
+  it("Solves the challenge", async () => {
 
     const value = utils.parseEther('0.001')
 
@@ -14,17 +14,16 @@ describe("Recovery", () => {
 
     const initialDestroyerBalance = await provider.getBalance(destroyer.address)
 
-    const generateTokenTx = await contract.connect(deployer).generateToken('NewSimpleToken', 10^6)
+    const generateTokenTx = await contract.connect(deployer).generateToken('NewSimpleToken', 10**6)
     await generateTokenTx.wait()
 
     const tokenContractAddress = utils.getContractAddress({from : contract.address, nonce: BigNumber.from('1')}); 
 		const token = await ethers.getContractAt("SimpleToken", tokenContractAddress);
 
-    const sendEtherTx = await deployer.sendTransaction({
+    await deployer.sendTransaction({
       to: token.address,
       value
     });
-    await sendEtherTx.wait()
     
     const destroyTokenTx = await token.connect(destroyer).destroy(destroyer.address)
     await destroyTokenTx.wait()
