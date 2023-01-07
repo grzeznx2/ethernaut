@@ -19,7 +19,7 @@ describe("NaughtCoin", () => {
     const tx = await contract.connect(deployer).transferFrom(deployer.address, receiver.address, deployerBalance)
     await tx.wait()
 
-    expect(await contract.balanceOf(deployer.address)).to.eq(new BigNumber.from('0'))
+    expect(await contract.balanceOf(deployer.address)).to.eq(BigNumber.from('0'))
 
   });
 });

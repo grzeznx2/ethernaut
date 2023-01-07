@@ -1,8 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-const { utils, BigNumber } = ethers;
-
 describe("Token", () => {
   it("Solves the challenge", async () => {
     const [deployer, receiver] = await ethers.getSigners()
