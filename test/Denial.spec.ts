@@ -4,7 +4,7 @@ import { ethers} from "hardhat";
 const {utils} = ethers
 
 describe("Denial", () => {
-  it.only("Solves the challenge", async () => {
+  it("Solves the challenge", async () => {
     const [deployer, attacker] = await ethers.getSigners()
     const contractFactory = await ethers.getContractFactory("Denial")
     const contract = await contractFactory.connect(deployer).deploy()
